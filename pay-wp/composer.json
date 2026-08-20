@@ -37,9 +37,10 @@
 		"10up/wp_mock": "*",
 		"php-stubs/woocommerce-stubs": "^5.2",
 		"phpunit/phpunit": "^9",
+		"wp-cli/wp-cli-bundle": "2.11.0",
 		"wpdesk/wp-plugin-flow-free": "^1",
 		"wpdesk/wp-wpdesk-composer": "^3",
-		"wpdesk/wp-codeception": "^2",
+		"wpdesk/wp-codeception": "^3",
 		"wpdesk/ltv-dashboard-widget": "^1.5",
 		"wpdesk/bm-sdk": "^3.2",
 		"wpdesk/wp-logs": "^1"
@@ -86,6 +87,6 @@
 			"url": "https://gitlab.wpdesk.dev/api/v4/group/wpdesk/-/packages/composer/"
 		}
 	},
-	"version": "2.2.29",
+	"version": "2.2.30",
 	"type": "wordpress-plugin"
 }

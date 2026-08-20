@@ -14,6 +14,12 @@ use WPPayVendor\Symfony\Polyfill\Intl\Grapheme as p;
 if (\PHP_VERSION_ID >= 80000) {
     return require __DIR__ . '/bootstrap80.php';
 }
+if (!\class_exists('ValueError', \false)) {
+    class ValueError extends \Error
+    {
+    }
+    \class_alias('WPPayVendor\ValueError', 'ValueError', \false);
+}
 if (!\defined('GRAPHEME_EXTR_COUNT')) {
     \define('GRAPHEME_EXTR_COUNT', 0);
 }
@@ -77,9 +83,21 @@ if (!\function_exists('grapheme_substr') && !\function_exists('WPPayVendor\graph
         return p\Grapheme::grapheme_substr($string, $offset, $length);
     }
 }
-if (!\function_exists('WPPayVendor\grapheme_str_split')) {
-    function grapheme_str_split($string, $length = 1)
+if (!\function_exists('grapheme_str_split') && !\function_exists('WPPayVendor\grapheme_str_split')) {
+    function grapheme_str_split(string $string, int $length = 1)
     {
         return p\Grapheme::grapheme_str_split($string, $length);
+    }
+}
+if (!\function_exists('grapheme_levenshtein') && !\function_exists('WPPayVendor\grapheme_levenshtein')) {
+    function grapheme_levenshtein(string $string1, string $string2, int $insertion_cost = 1, int $replacement_cost = 1, int $deletion_cost = 1, string $locale = '')
+    {
+        return p\Grapheme::grapheme_levenshtein($string1, $string2, $insertion_cost, $replacement_cost, $deletion_cost);
+    }
+}
+if (!\function_exists('WPPayVendor\grapheme_strrev')) {
+    function grapheme_strrev(string $string)
+    {
+        return p\Grapheme::grapheme_strrev($string);
     }
 }

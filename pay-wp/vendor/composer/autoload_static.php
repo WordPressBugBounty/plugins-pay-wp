@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
+class ComposerStaticInit5c4f164fd8d37c01e38f9e06c6d6db9c
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
@@ -203,7 +203,6 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\BlueMedia\\Transaction\\ValueObject\\TransactionContinue' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/bm-sdk/src/Transaction/ValueObject/TransactionContinue.php',
         'WPPayVendor\\BlueMedia\\Transaction\\ValueObject\\TransactionInit' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/bm-sdk/src/Transaction/ValueObject/TransactionInit.php',
         'WPPayVendor\\BlueMedia\\Transaction\\View' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/bm-sdk/src/Transaction/View.php',
-        'WPPayVendor\\CURLStringFile' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'WPPayVendor\\Doctrine\\Common\\Annotations\\Annotation' => __DIR__ . '/../..' . '/vendor_prefixed/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation.php',
         'WPPayVendor\\Doctrine\\Common\\Annotations\\AnnotationException' => __DIR__ . '/../..' . '/vendor_prefixed/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationException.php',
         'WPPayVendor\\Doctrine\\Common\\Annotations\\AnnotationReader' => __DIR__ . '/../..' . '/vendor_prefixed/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationReader.php',
@@ -256,14 +255,20 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\GuzzleHttp\\Handler\\CurlFactoryInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlFactoryInterface.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\CurlHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlHandler.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\CurlMultiHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlMultiHandler.php',
+        'WPPayVendor\\GuzzleHttp\\Handler\\CurlShareHandleState' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlShareHandleState.php',
+        'WPPayVendor\\GuzzleHttp\\Handler\\CurlVersion' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/CurlVersion.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\EasyHandle' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/EasyHandle.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\HeaderProcessor' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/HeaderProcessor.php',
+        'WPPayVendor\\GuzzleHttp\\Handler\\HostValidator' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/HostValidator.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\MockHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/MockHandler.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\Proxy' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/Proxy.php',
+        'WPPayVendor\\GuzzleHttp\\Handler\\ProxyEnvironment' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/ProxyEnvironment.php',
         'WPPayVendor\\GuzzleHttp\\Handler\\StreamHandler' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/StreamHandler.php',
+        'WPPayVendor\\GuzzleHttp\\Handler\\TlsVersion' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Handler/TlsVersion.php',
         'WPPayVendor\\GuzzleHttp\\MessageFormatter' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/MessageFormatter.php',
         'WPPayVendor\\GuzzleHttp\\MessageFormatterInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/MessageFormatterInterface.php',
         'WPPayVendor\\GuzzleHttp\\Middleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Middleware.php',
+        'WPPayVendor\\GuzzleHttp\\Multiplexing' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Multiplexing.php',
         'WPPayVendor\\GuzzleHttp\\Pool' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Pool.php',
         'WPPayVendor\\GuzzleHttp\\PrepareBodyMiddleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php',
         'WPPayVendor\\GuzzleHttp\\Promise\\AggregateException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/AggregateException.php',
@@ -302,6 +307,7 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\GuzzleHttp\\Psr7\\Query' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Query.php',
         'WPPayVendor\\GuzzleHttp\\Psr7\\Request' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Request.php',
         'WPPayVendor\\GuzzleHttp\\Psr7\\Response' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Response.php',
+        'WPPayVendor\\GuzzleHttp\\Psr7\\Rfc3986' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Rfc3986.php',
         'WPPayVendor\\GuzzleHttp\\Psr7\\Rfc7230' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Rfc7230.php',
         'WPPayVendor\\GuzzleHttp\\Psr7\\ServerRequest' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/ServerRequest.php',
         'WPPayVendor\\GuzzleHttp\\Psr7\\Stream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Stream.php',
@@ -317,6 +323,7 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\GuzzleHttp\\RequestOptions' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RequestOptions.php',
         'WPPayVendor\\GuzzleHttp\\RetryMiddleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RetryMiddleware.php',
         'WPPayVendor\\GuzzleHttp\\TransferStats' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/TransferStats.php',
+        'WPPayVendor\\GuzzleHttp\\TransportSharing' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/TransportSharing.php',
         'WPPayVendor\\GuzzleHttp\\Utils' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Utils.php',
         'WPPayVendor\\JMS\\Serializer\\AbstractVisitor' => __DIR__ . '/../..' . '/vendor_prefixed/jms/serializer/src/AbstractVisitor.php',
         'WPPayVendor\\JMS\\Serializer\\Accessor\\AccessorStrategyInterface' => __DIR__ . '/../..' . '/vendor_prefixed/jms/serializer/src/Accessor/AccessorStrategyInterface.php',
@@ -677,7 +684,6 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\Psr\\Log\\Test\\DummyTest' => __DIR__ . '/../..' . '/vendor_prefixed/psr/log/Psr/Log/Test/DummyTest.php',
         'WPPayVendor\\Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/../..' . '/vendor_prefixed/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'WPPayVendor\\Psr\\Log\\Test\\TestLogger' => __DIR__ . '/../..' . '/vendor_prefixed/psr/log/Psr/Log/Test/TestLogger.php',
-        'WPPayVendor\\ReturnTypeWillChange' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'WPPayVendor\\Stringable' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'WPPayVendor\\Symfony\\Component\\BrowserKit\\AbstractBrowser' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/browser-kit/AbstractBrowser.php',
         'WPPayVendor\\Symfony\\Component\\BrowserKit\\Cookie' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/browser-kit/Cookie.php',
@@ -901,6 +907,23 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\Symfony\\Component\\Finder\\Iterator\\SortableIterator' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/finder/Iterator/SortableIterator.php',
         'WPPayVendor\\Symfony\\Component\\Finder\\Iterator\\VcsIgnoredFilterIterator' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/finder/Iterator/VcsIgnoredFilterIterator.php',
         'WPPayVendor\\Symfony\\Component\\Finder\\SplFileInfo' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/finder/SplFileInfo.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\ExceptionInterface' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/ExceptionInterface.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\InvalidArgumentException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/InvalidArgumentException.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\LogicException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/LogicException.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\ProcessFailedException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/ProcessFailedException.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\ProcessSignaledException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/ProcessSignaledException.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\ProcessTimedOutException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/ProcessTimedOutException.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Exception\\RuntimeException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Exception/RuntimeException.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\ExecutableFinder' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/ExecutableFinder.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\InputStream' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/InputStream.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\PhpExecutableFinder' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/PhpExecutableFinder.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\PhpProcess' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/PhpProcess.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Pipes\\AbstractPipes' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Pipes/AbstractPipes.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Pipes\\PipesInterface' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Pipes/PipesInterface.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Pipes\\UnixPipes' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Pipes/UnixPipes.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Pipes\\WindowsPipes' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Pipes/WindowsPipes.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\Process' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/Process.php',
+        'WPPayVendor\\Symfony\\Component\\Process\\ProcessUtils' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/process/ProcessUtils.php',
         'WPPayVendor\\Symfony\\Component\\String\\AbstractString' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/string/AbstractString.php',
         'WPPayVendor\\Symfony\\Component\\String\\AbstractUnicodeString' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/string/AbstractUnicodeString.php',
         'WPPayVendor\\Symfony\\Component\\String\\ByteString' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/string/ByteString.php',
@@ -924,6 +947,7 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\Symfony\\Component\\Yaml\\Exception\\RuntimeException' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/Exception/RuntimeException.php',
         'WPPayVendor\\Symfony\\Component\\Yaml\\Inline' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/Inline.php',
         'WPPayVendor\\Symfony\\Component\\Yaml\\Parser' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/Parser.php',
+        'WPPayVendor\\Symfony\\Component\\Yaml\\ParserState' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/ParserState.php',
         'WPPayVendor\\Symfony\\Component\\Yaml\\Tag\\TaggedValue' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/Tag/TaggedValue.php',
         'WPPayVendor\\Symfony\\Component\\Yaml\\Unescaper' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/Unescaper.php',
         'WPPayVendor\\Symfony\\Component\\Yaml\\Yaml' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/yaml/Yaml.php',
@@ -945,9 +969,8 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php73/Php73.php',
         'WPPayVendor\\Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Php80.php',
         'WPPayVendor\\Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/PhpToken.php',
-        'WPPayVendor\\Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php81/Php81.php',
         'WPPayVendor\\UnhandledMatchError' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'WPPayVendor\\ValueError' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'WPPayVendor\\ValueError' => __DIR__ . '/../..' . '/vendor_prefixed/symfony/polyfill-intl-grapheme/bootstrap.php',
         'WPPayVendor\\WPDesk\\Dashboard\\DashboardWidget' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/ltv-dashboard-widget/src/DashboardWidget.php',
         'WPPayVendor\\WPDesk\\Logger\\BasicLoggerFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/BasicLoggerFactory.php',
         'WPPayVendor\\WPDesk\\Logger\\LoggerFacade' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-logs/src/LoggerFacade.php',
@@ -997,12 +1020,13 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\WPDesk\\Plugin\\Flow\\Initialization\\Simple\\SimplePaidStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimplePaidStrategy.php',
         'WPPayVendor\\WPDesk\\Plugin\\Flow\\Initialization\\Simple\\TrackerInstanceAsFilterTrait' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/TrackerInstanceAsFilterTrait.php',
         'WPPayVendor\\WPDesk\\Plugin\\Flow\\PluginBootstrap' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php',
-        'WPPayVendor\\WPDesk\\Tracker\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Assets.php',
-        'WPPayVendor\\WPDesk\\Tracker\\OptInOptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptInOptOut.php',
-        'WPPayVendor\\WPDesk\\Tracker\\OptInPage' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptInPage.php',
-        'WPPayVendor\\WPDesk\\Tracker\\OptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/OptOut.php',
-        'WPPayVendor\\WPDesk\\Tracker\\PluginActionLinks' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/PluginActionLinks.php',
-        'WPPayVendor\\WPDesk\\Tracker\\Shop' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Shop.php',
+        'WPPayVendor\\WPDesk\\Tracker\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/Assets.php',
+        'WPPayVendor\\WPDesk\\Tracker\\OptInOptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/OptInOptOut.php',
+        'WPPayVendor\\WPDesk\\Tracker\\OptInPage' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/OptInPage.php',
+        'WPPayVendor\\WPDesk\\Tracker\\OptOut' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/OptOut.php',
+        'WPPayVendor\\WPDesk\\Tracker\\PluginActionLinks' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/PluginActionLinks.php',
+        'WPPayVendor\\WPDesk\\Tracker\\Shop' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/Shop.php',
+        'WPPayVendor\\WPDesk\\Tracker\\Tracker' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/Tracker/Tracker.php',
         'WPPayVendor\\WPDesk\\View\\PluginViewBuilder' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/PluginViewBuilder.php',
         'WPPayVendor\\WPDesk\\View\\Renderer\\LoadTemplatePlugin' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Renderer/LoadTemplatePlugin.php',
         'WPPayVendor\\WPDesk\\View\\Renderer\\Renderer' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Renderer/Renderer.php',
@@ -1053,6 +1077,7 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
         'WPPayVendor\\WPDesk_Tracker_Sender' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender.php',
         'WPPayVendor\\WPDesk_Tracker_Sender_Exception_WpError' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/Exception/class-wpdesk-tracker-sender-exception-wperror.php',
         'WPPayVendor\\WPDesk_Tracker_Sender_Logged' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-logged.php',
+        'WPPayVendor\\WPDesk_Tracker_Sender_Resolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-resolver.php',
         'WPPayVendor\\WPDesk_Tracker_Sender_Wordpress_To_WPDesk' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/sender/class-wpdesk-tracker-sender-wordpress-to-wpdesk.php',
         'WPPayVendor\\WPDesk_Translable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translable.php',
         'WPPayVendor\\WPDesk_Translatable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translatable.php',
@@ -1061,9 +1086,9 @@ class ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc5f8136a1d2f7370f5339c7d91597418::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5c4f164fd8d37c01e38f9e06c6d6db9c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5c4f164fd8d37c01e38f9e06c6d6db9c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5c4f164fd8d37c01e38f9e06c6d6db9c::$classMap;
 
         }, null, ClassLoader::class);
     }

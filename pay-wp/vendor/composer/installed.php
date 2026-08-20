@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpdesk/gateway-wp-pay',
-        'pretty_version' => '2.2.29',
-        'version' => '2.2.29.0',
-        'reference' => 'c1647bd9ecd533378479c40e4381c8eaab80a567',
+        'pretty_version' => '2.2.30',
+        'version' => '2.2.30.0',
+        'reference' => '60d8a4bb821b3de0adcf520adf832bb74a60aee5',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'doctrine/deprecations' => array(
-            'pretty_version' => '1.1.5',
-            'version' => '1.1.5.0',
-            'reference' => '459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38',
+            'pretty_version' => '1.1.6',
+            'version' => '1.1.6.0',
+            'reference' => 'd4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/deprecations',
             'aliases' => array(),
@@ -74,9 +74,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/gateway-wp-pay' => array(
-            'pretty_version' => '2.2.29',
-            'version' => '2.2.29.0',
-            'reference' => 'c1647bd9ecd533378479c40e4381c8eaab80a567',
+            'pretty_version' => '2.2.30',
+            'version' => '2.2.30.0',
+            'reference' => '60d8a4bb821b3de0adcf520adf832bb74a60aee5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
