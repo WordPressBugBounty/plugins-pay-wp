@@ -3,7 +3,7 @@ Contributors: wpdesk, dyszczo
 Tags: autopay, blue media, wp pay, płatności, blik
 Requires at least: 6.1
 Tested up to: 7.1
-Stable tag: 2.2.30
+Stable tag: 2.2.31
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -210,6 +210,9 @@ Zaktualizuj wtyczkę do najnowszej wersji w menu Wtyczki w WordPress lub w Kokpi
 Możesz też pobrać wtyczkę Autopay dla WooCommerce i wykonać aktualizację samodzielnie, np. przez FTP.
 
 == Changelog ==
+
+= 2.2.31 - 2026-10-07 =
+* Added support for WooCommerce 11.2
 
 = 2.2.30 - 2026-08-20 =
 * Added support for WordPress 7.1
