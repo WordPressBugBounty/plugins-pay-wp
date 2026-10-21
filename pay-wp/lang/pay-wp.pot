@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Autopay for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Autopay for WooCommerce 2.2.31\n"
+"Project-Id-Version: Autopay for WooCommerce 2.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pay-wp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-07T05:44:40+00:00\n"
+"POT-Creation-Date: 2026-10-21T11:57:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: pay-wp\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: pay-wp.php:5
-#: src/WooCommerceGateway/StandardPaymentGateway.php:49
+#: src/WooCommerceGateway/StandardPaymentGateway.php:51
 msgid "Autopay online payments for WooCommerce. Pay quickly and securely with electronic transfer, BLIK, G-Pay, Apple Pay or credit card."
 msgstr ""
 
@@ -40,13 +40,51 @@ msgstr ""
 msgid "http://www.wpdesk.pl/sk/pay-wp-author"
 msgstr ""
 
-#: src/BlueMediaApi/BlueMediaClient.php:107
+#: src/BlueMediaApi/BlueMediaClient.php:115
 #, php-format
 msgid "The API responded with an error message: %s"
 msgstr ""
 
+#: src/BlueMediaApi/BlueMediaClient.php:381
+msgid "Google Pay is unavailable. Please choose another payment method."
+msgstr ""
+
+#: src/BlueMediaApi/BlueMediaClient.php:391
+#: src/WooCommerceGateway/WalletGateway.php:356
+#: src/WooCommerceGateway/WalletGateway.php:364
+#: assets-src/wallets/classic.js:102
+#: assets/js/wallets.js:1
+msgid "The payment status is unknown. Please contact the shop before trying again."
+msgstr ""
+
 #: src/BlueMediaApi/Exception/InvalidHashException.php:9
 msgid "Invalid hash"
+msgstr ""
+
+#: src/Helpers/WalletPayment.php:8
+#: src/Helpers/WalletPayment.php:16
+msgid "Invalid payment data."
+msgstr ""
+
+#: src/Helpers/WalletPayment.php:29
+#: src/Helpers/WalletPayment.php:37
+#: src/WooCommerceGateway/WalletGateway.php:339
+#: assets-src/wallets/wallet.js:88
+#: assets-src/wallets/wallet.js:102
+#: assets-src/wallets/wallet.js:166
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Please refresh the checkout and authorize the payment again."
+msgstr ""
+
+#: src/Helpers/WalletPayment.php:56
+#: src/Helpers/WalletPayment.php:62
+msgid "Invalid payment token. Please authorize the payment again."
+msgstr ""
+
+#: src/Helpers/WalletPayment.php:80
+#: src/WooCommerceGateway/WalletGateway.php:327
+msgid "The previous payment is awaiting confirmation. Please contact the shop before trying again."
 msgstr ""
 
 #: src/views/registration_info.php:3
@@ -96,7 +134,7 @@ msgid "Default currency"
 msgstr ""
 
 #: src/views/wppay-settings-pos-item.php:4
-#: src/WooCommerceGateway/StandardPaymentGateway.php:83
+#: src/WooCommerceGateway/StandardPaymentGateway.php:85
 msgid "Test mode"
 msgstr ""
 
@@ -122,12 +160,12 @@ msgid "You will receive your credentials by email after registration or you will
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:30
-#: src/WooCommerceGateway/StandardPaymentGateway.php:70
+#: src/WooCommerceGateway/StandardPaymentGateway.php:72
 msgid "Main settings"
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:34
-#: src/WooCommerceGateway/StandardPaymentGateway.php:77
+#: src/WooCommerceGateway/StandardPaymentGateway.php:79
 msgid "Enable/Disable"
 msgstr ""
 
@@ -136,22 +174,22 @@ msgid "Enable payments"
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:40
-#: src/WooCommerceGateway/StandardPaymentGateway.php:91
+#: src/WooCommerceGateway/StandardPaymentGateway.php:93
 msgid "Title"
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:42
-#: src/WooCommerceGateway/StandardPaymentGateway.php:93
+#: src/WooCommerceGateway/StandardPaymentGateway.php:95
 msgid "The name of the payment gateway that the customer sees when placing an order."
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:47
-#: src/WooCommerceGateway/StandardPaymentGateway.php:98
+#: src/WooCommerceGateway/StandardPaymentGateway.php:100
 msgid "Description of the payment gateway that the customer sees when placing an order."
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:49
-#: src/WooCommerceGateway/StandardPaymentGateway.php:100
+#: src/WooCommerceGateway/StandardPaymentGateway.php:102
 msgid "Autopay online payments. Pay by electronic transfer, traditional bank transfer or credit card."
 msgstr ""
 
@@ -185,8 +223,9 @@ msgstr ""
 
 #: src/WooCommerceGateway/BlikZeroEmbedGateway.php:148
 #: src/WooCommerceGateway/CardEmbedGateway.php:81
-#: src/WooCommerceGateway/StandardPaymentGateway.php:264
+#: src/WooCommerceGateway/StandardPaymentGateway.php:276
 #: src/WooCommerceGateway/SubscriptionGateway.php:208
+#: src/WooCommerceGateway/WalletGateway.php:347
 msgid "Autopay transaction"
 msgstr ""
 
@@ -233,48 +272,52 @@ msgstr ""
 msgid "Card was not authorized correctly."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:48
-#: src/WooCommerceGateway/StandardPaymentGateway.php:57
+#: src/WooCommerceGateway/StandardPaymentGateway.php:50
+#: src/WooCommerceGateway/StandardPaymentGateway.php:59
 msgid "Autopay Quick Payments"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:79
+#: src/WooCommerceGateway/StandardPaymentGateway.php:81
 msgid "Enable Autopay"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:85
+#: src/WooCommerceGateway/StandardPaymentGateway.php:87
 msgid "Make test payments only"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:86
+#: src/WooCommerceGateway/StandardPaymentGateway.php:88
 msgid "The ID and Hash Key for the test environment are different from the production data. To get the data for the test environment, please contact - dws@autopay.pl."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:105
+#: src/WooCommerceGateway/StandardPaymentGateway.php:107
 msgid "Currency management"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:140
+#: src/WooCommerceGateway/StandardPaymentGateway.php:142
 msgid "Incorrect ITN message"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:169
+#: src/WooCommerceGateway/StandardPaymentGateway.php:173
 msgid "Override FAILURE status due to ITN message"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:223
+#: src/WooCommerceGateway/StandardPaymentGateway.php:216
+msgid "Incorrect payment reference."
+msgstr ""
+
+#: src/WooCommerceGateway/StandardPaymentGateway.php:234
 msgid "Incorrect hash sent from BM"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:230
+#: src/WooCommerceGateway/StandardPaymentGateway.php:242
 msgid "Redirected to payment"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:249
+#: src/WooCommerceGateway/StandardPaymentGateway.php:261
 msgid "Thank you for placing your order. Click to make payment by using Autopay."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:253
+#: src/WooCommerceGateway/StandardPaymentGateway.php:265
 msgid "The payment method was not configured correctly and is not available."
 msgstr ""
 
@@ -322,6 +365,140 @@ msgstr ""
 #: src/WooCommerceGateway/SubscriptionGateway.php:199
 #, php-format
 msgid "Subscription %s cancelled"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:24
+msgid "Digital wallet payments through Autopay. Requires HTTPS and activation in Autopay."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:30
+#, php-format
+msgid "Pay securely with %s via Autopay."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:33
+msgid "Payment mode"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:34
+msgid "Redirect to Apple Pay in Autopay"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:35
+msgid "Authorize the payment on the Autopay page with only Apple Pay available. Merchant ID, certificates and domain verification are not required in this mode."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:38
+msgid "Apple merchant ID"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:39
+msgid "One configuration is used for both test and production. After changing the Autopay environment, update these fields if the new environment requires different Apple Pay credentials."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:42
+msgid "Merchant identity certificate (PEM path)"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:43
+msgid "Absolute server path outside the public web directory. Use a PEM merchant identity certificate, not the payment processing certificate."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:45
+msgid "Merchant identity private key (PEM path)"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:47
+msgid "Apple Pay domain verification file"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:48
+msgid "Upload the domain association file from Apple for this environment. Register your domain with Apple and provide Autopay with the payment processing certificate generated from its CSR."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:52
+msgid "Google merchant ID"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:53
+msgid "Optional Merchant ID from Google Pay & Wallet Console. Used only in production for your own Google Pay account with an approved shop domain. Leave empty to use the merchant configuration supplied by Autopay. Not required or sent in test mode. This is not the Autopay ServiceID or AcceptorID."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:55
+msgid "Google Pay requires an active Autopay channel and merchant configuration for the checkout domain. Configuration errors are recorded in WooCommerce → Status → Logs (source: pay-wp)."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:126
+msgid "Apple Pay certificates must be readable files outside the public web directory."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:219
+#: src/WooCommerceGateway/WalletGateway.php:238
+#: src/WooCommerceGateway/WalletGateway.php:311
+#: assets-src/wallets/wallet.js:115
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "This payment method is unavailable. Please choose another method."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:231
+#: src/WooCommerceGateway/WalletGateway.php:317
+#: src/WooCommerceGateway/WalletGateway.php:333
+msgid "This order cannot be paid."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:258
+msgid "The order total or currency has changed. Please refresh the checkout and authorize the payment again."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:268
+msgid "Apple Pay is unavailable."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:272
+msgid "Please wait a moment before trying again."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:278
+msgid "Invalid Apple Pay validation URL."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:297
+msgid "Apple Pay could not verify this shop. Please choose another payment method."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:341
+#, php-format
+msgid "Autopay wallet payment reference: %s."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:360
+msgid "Payment failed. Please authorize the payment again."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:390
+msgid "You cannot pay for this order."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:440
+#, php-format
+msgid "The file is available at: %s"
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:461
+msgid "The Apple Pay domain association file could not be uploaded."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:465
+msgid "The Apple Pay domain association file must not be empty or larger than 100 KB."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:471
+msgid "The Apple Pay domain association file is invalid."
+msgstr ""
+
+#: src/WooCommerceGateway/WalletGateway.php:475
+msgid "The Apple Pay domain association file has been uploaded."
 msgstr ""
 
 #: vendor_prefixed/wpdesk/ltv-dashboard-widget/src/DashboardWidget.php:65
@@ -618,4 +795,76 @@ msgstr ""
 #: assets-src/checkout_blocks/blik_block.jsx:128
 #: assets/js/checkout-blocks/blik_block.js:1
 msgid "Potwierdź transakcję w aplikacji bankowej."
+msgstr ""
+
+#: assets-src/wallets/Blocks.jsx:44
+#: assets-src/wallets/classic.js:59
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Loading payment method…"
+msgstr ""
+
+#: assets-src/wallets/Blocks.jsx:48
+#: assets/js/checkout-blocks/wallets.js:1
+msgid "The checkout is updating. Please wait or refresh the page."
+msgstr ""
+
+#: assets-src/wallets/Blocks.jsx:60
+#: assets-src/wallets/Blocks.jsx:74
+#: assets-src/wallets/classic.js:126
+#: assets-src/wallets/classic.js:132
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Use the wallet button to authorize this payment."
+msgstr ""
+
+#: assets-src/wallets/Blocks.jsx:66
+#: assets-src/wallets/classic.js:97
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Please check the checkout details and try again."
+msgstr ""
+
+#: assets-src/wallets/Blocks.jsx:77
+#: assets-src/wallets/Blocks.jsx:110
+#: assets-src/wallets/Blocks.jsx:125
+#: assets-src/wallets/classic.js:77
+#: assets-src/wallets/wallet.js:144
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "The checkout has changed. Please authorize the payment again."
+msgstr ""
+
+#: assets-src/wallets/Blocks.jsx:94
+#: assets/js/checkout-blocks/wallets.js:1
+msgid "Please check the checkout details and payment status before trying again."
+msgstr ""
+
+#: assets-src/wallets/classic.js:67
+#: assets/js/wallets.js:1
+msgid "Please accept the terms and conditions."
+msgstr ""
+
+#: assets-src/wallets/wallet.js:32
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Google Pay could not be loaded. Please choose another method."
+msgstr ""
+
+#: assets-src/wallets/wallet.js:66
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Payment could not be started. Please refresh the checkout."
+msgstr ""
+
+#: assets-src/wallets/wallet.js:97
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Payment was cancelled or could not be completed."
+msgstr ""
+
+#: assets-src/wallets/wallet.js:171
+#: assets/js/checkout-blocks/wallets.js:1
+#: assets/js/wallets.js:1
+msgid "Payment failed. Please try again."
 msgstr ""

@@ -1,0 +1,43 @@
+.wppay-wallet-button {
+	width: 100%;
+	max-width: 320px;
+	min-height: 44px;
+	margin: 12px 0;
+}
+.wc-block-checkout:has(.wppay-wallet-action) .wc-block-components-checkout-place-order-button {
+	display: none;
+}
+.wc-block-checkout__actions_row .wppay-wallet-action {
+	width: 100%;
+	max-width: 320px;
+	margin-left: auto;
+}
+.payment_method_wppay_apple_pay:has(.wppay-wallet):not(.wppay-wallet-available),
+.payment_method_wppay_google_pay:has(.wppay-wallet):not(.wppay-wallet-available) {
+	display: none;
+}
+.wppay-apple-pay-button {
+	-webkit-appearance: -apple-pay-button;
+	-apple-pay-button-type: pay;
+	-apple-pay-button-style: black;
+	width: 100%;
+	height: 44px;
+	border: 0;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.wppay-wallet-button button:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 3px;
+}
+.wppay-wallet-button[aria-disabled="true"] {
+	opacity: 0.5;
+	pointer-events: none;
+}
+.payment_method_wppay_apple_pay img,
+.payment_method_wppay_google_pay img,
+.wppay_apple_pay__logo img,
+.wppay_google_pay__logo img {
+	max-height: 24px;
+	width: auto;
+}

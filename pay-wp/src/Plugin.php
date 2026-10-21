@@ -8,6 +8,8 @@ namespace WPDesk\GatewayWPPay;
 use WPDesk\GatewayWPPay\Blocks\AutopayBlock;
 use WPDesk\GatewayWPPay\Blocks\BlikBlock;
 use WPDesk\GatewayWPPay\Blocks\RecurringBlock;
+use WPDesk\GatewayWPPay\Blocks\WalletBlock;
+use WPDesk\GatewayWPPay\Helpers\WalletPayment;
 use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaClientFactory;
 use WPDesk\GatewayWPPay\BlueMediaApi\Handlers\APIHandler;
 use WPDesk\GatewayWPPay\WooCommerceGateway\BlikZeroEmbedGateway;
@@ -82,6 +84,7 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 	public function hooks(): void {
 		parent::hooks();
 		add_action( 'init', [ $this, 'init_gateways' ] );
+		add_action( 'woocommerce_before_delete_order', [ WalletPayment::class, 'delete_order_references' ] );
 		( new DashboardWidget() )->hooks();
 	}
 
@@ -94,11 +97,17 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 		$this->gateway_proxy->get_autopay_gateway()->hooks();
 		$this->gateway_proxy->get_blik_gateway()->hooks();
 		$this->gateway_proxy->get_subscription_gateway()->hooks();
+		foreach ( [ 'apple', 'google' ] as $wallet ) {
+			$this->gateway_proxy->get_wallet_gateway( $wallet )->hooks();
+		}
 	}
 
 	public function register_payment_gateways( $methods ) {
 		$methods[] = $this->gateway_proxy->get_autopay_gateway();
 		$methods[] = $this->gateway_proxy->get_blik_gateway();
+		foreach ( [ 'apple', 'google' ] as $wallet ) {
+			$methods[] = $this->gateway_proxy->get_wallet_gateway( $wallet );
+		}
 		if ( class_exists( 'WC_Subscriptions' ) ) {
 			$methods[] = $this->gateway_proxy->get_subscription_gateway();
 		}
@@ -159,6 +168,9 @@ class Plugin extends AbstractPlugin implements LoggerAwareInterface, HookableCol
 				function ( \Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
 					$payment_method_registry->register( new AutopayBlock( $this->gateway_proxy->get_autopay_gateway(), $this->get_plugin_assets_url() . 'js/checkout-blocks/autopay_block', $this->get_plugin_assets_url() . 'images/icon.svg' ) );
 					$payment_method_registry->register( new BlikBlock( $this->gateway_proxy->get_blik_gateway(), $this->get_plugin_assets_url() . 'js/checkout-blocks/blik_block', $this->get_plugin_assets_url() . 'images/icon-blik.png' ) );
+					foreach ( [ 'apple', 'google' ] as $wallet ) {
+						$payment_method_registry->register( new WalletBlock( $this->gateway_proxy->get_wallet_gateway( $wallet ), $this->get_plugin_assets_url() ) );
+					}
 					$payment_method_registry->register( new RecurringBlock( $this->gateway_proxy->get_subscription_gateway(), $this->get_plugin_assets_url() . 'js/checkout-blocks/recurring_block', $this->get_plugin_assets_url() . 'images/icon.svg' ) );
 				}
 			);

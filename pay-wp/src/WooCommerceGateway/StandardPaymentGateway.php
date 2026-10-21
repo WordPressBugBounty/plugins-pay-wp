@@ -2,6 +2,8 @@
 
 namespace WPDesk\GatewayWPPay\WooCommerceGateway;
 
+use WPDesk\GatewayWPPay\Helpers\WalletPayment;
+
 use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaClient;
 use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaClientFactory;
 use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaNoCredentilalsException;
@@ -147,12 +149,14 @@ final class StandardPaymentGateway extends \WC_Payment_Gateway {
 		/** @var \WPPayVendor\BlueMedia\Itn\ValueObject\Itn $itnIn */
 		$itnIn                = $result->getData();
 		$transactionConfirmed = $this->validate_itn_hash( $transactions, $bm_client, $itnIn );
+		$order = WalletPayment::resolve_order( $itnIn->getOrderID() );
+		$transactionConfirmed = $transactionConfirmed && $order
+			&& WalletPayment::confirm_itn( $order, $itnIn, $bm_client->get_service_id() );
 //		file_put_contents( __DIR__ . '/itn_response.txt', print_r( $itnIn, true ), FILE_APPEND );
 		$this->logger->debug( print_r( $itnIn, true ) );
 
 		if ( $transactionConfirmed ) {
 			$status = $itnIn->getPaymentStatus();
-			$order  = new \WC_Order( $itnIn->getOrderId() );
 
 			BlikZeroEmbedGateway::update_blik_status( $order->get_id(), $status );
 
@@ -172,10 +176,14 @@ final class StandardPaymentGateway extends \WC_Payment_Gateway {
 				}
 				$order->payment_complete( $itn->getRemoteID() );
 
-			} elseif ( $status === 'FAILURE' ) {
+			} elseif ( $status === 'FAILURE' && ( strpos( $itnIn->getOrderID(), 'wpw' ) !== 0
+				|| get_option( 'wppay_wallet_pending_' . $order->get_id() ) === $itnIn->getOrderID() ) ) {
 				if ( $order->has_status( [ 'wc-pending', 'pending', 'wc-on-hold', 'on-hold' ] ) ) {
 					$order->update_status( 'failed' );
 				}
+			}
+			if ( in_array( $status, [ 'SUCCESS', 'FAILURE' ], true ) ) {
+				WalletPayment::finish_attempt( $order->get_id(), $itnIn->getOrderID() );
 			}
 		}
 
@@ -199,11 +207,14 @@ final class StandardPaymentGateway extends \WC_Payment_Gateway {
 
 	public function return_after_transaction(): void {
 		$serviceId = (int) $_GET['ServiceID'];
-		$order_id  = (int) $_GET['OrderID'];
+		$order_id  = isset( $_GET['OrderID'] ) && is_string( $_GET['OrderID'] ) ? wp_unslash( $_GET['OrderID'] ) : '';
 		$hash      = sanitize_text_field( $_GET['Hash'] );
 
 		try {
-			$order     = new \WC_Order( $order_id );
+			$order = WalletPayment::resolve_order( $order_id );
+			if ( ! $order ) {
+				throw new \RuntimeException( __( 'Incorrect payment reference.', 'pay-wp' ) );
+			}
 		} catch ( \Exception $e ) {
 			error_log(print_r( $e, true ));
 			wp_die( $e->getMessage());
@@ -227,6 +238,7 @@ final class StandardPaymentGateway extends \WC_Payment_Gateway {
 	public function process_payment( $order_id ): array {
 		global $woocommerce;
 		$order = new \WC_Order( $order_id );
+		WalletPayment::assert_can_start( [ 'orderID' => $order_id ] );
 		$order->add_order_note( __( 'Redirected to payment', 'pay-wp' ) );
 		$woocommerce->cart->empty_cart();
 

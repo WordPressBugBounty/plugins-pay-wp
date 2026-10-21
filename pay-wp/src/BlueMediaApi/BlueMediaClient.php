@@ -9,12 +9,15 @@ use WPDesk\GatewayWPPay\BlueMediaApi\Dto\TransactionError;
 use WPDesk\GatewayWPPay\BlueMediaApi\Dto\TransactionRefund;
 use WPDesk\GatewayWPPay\BlueMediaApi\Dto\TransactionRefundResponse;
 use WPDesk\GatewayWPPay\BlueMediaApi\Exception\TransactionErrorException;
+use WPDesk\GatewayWPPay\Helpers\WalletPayment;
 use WPPayVendor\BlueMedia\Client;
 use WPPayVendor\BlueMedia\HttpClient\ValueObject\Response;
 use WPPayVendor\BlueMedia\Itn\ValueObject\Itn;
 use WPPayVendor\BlueMedia\Serializer\SerializableInterface;
 
 class BlueMediaClient {
+	protected bool $sandbox = false;
+
 	/** @var Client */
 	private $bm_vendor_client;
 
@@ -49,6 +52,10 @@ class BlueMediaClient {
 		return 'https://pay.bm.pl';
 	}
 
+	protected function get_wallet_api_address(): string {
+		return 'https://pay.autopay.eu';
+	}
+
 	/**
 	 * Method allows to check if gateway returns with valid data.
 	 *
@@ -71,6 +78,7 @@ class BlueMediaClient {
 	 * @api
 	 */
 	public function doTransactionBackground( array $transactionData ): Response {
+		WalletPayment::assert_can_start( $transactionData['transaction'] ?? $transactionData );
 		return $this->bm_vendor_client->doTransactionBackground( $transactionData );
 	}
 
@@ -135,6 +143,7 @@ class BlueMediaClient {
 	 */
 	public function getTransactionRedirect( array $transactionData
 	): Response {
+		WalletPayment::assert_can_start( $transactionData );
 
 		return $this->bm_vendor_client->getTransactionRedirect( [
 			'gatewayUrl'  => $this->get_api_address(),
@@ -152,6 +161,7 @@ class BlueMediaClient {
 	 * @api
 	 */
 	public function doTransactionInit( array $transactionData ): Response {
+		WalletPayment::assert_can_start( $transactionData );
 		return $this->bm_vendor_client->doTransactionInit( [
 			'gatewayUrl'  => $this->get_api_address(),
 			'transaction' => $transactionData,
@@ -160,6 +170,7 @@ class BlueMediaClient {
 	}
 
 	public function do_recurring_transaction_init( array $transaction_data ) {
+		WalletPayment::assert_can_start( $transaction_data );
 
 		$transaction_data = array_merge(['ServiceID' => $this->serviceId], $transaction_data);
 		$hash = $this->hashTransactionParameters( $transaction_data );
@@ -318,6 +329,111 @@ class BlueMediaClient {
 
 	public function get_service_id(): string {
 		return $this->serviceId;
+	}
+
+	public function get_google_pay_config( string $domain, string $merchant_id = '', string $merchant_name = '' ): array {
+		// authJwt belongs to a specific service, environment and domain and expires; do not cache it.
+		$params = [ 'ServiceID' => (int) $this->serviceId, 'MerchantDomain' => $domain ];
+		$params['Hash'] = $this->hashTransactionParameters( $params );
+		$response = wp_remote_post( $this->get_wallet_api_address() . '/webapi/googlePayMerchantInfo', [
+			'timeout' => 20, 'redirection' => 0,
+			'headers' => [ 'Content-Type' => 'application/json', 'BmHeader' => 'pay-bm' ],
+			'body' => wp_json_encode( $params ),
+		] );
+		$data = is_wp_error( $response ) ? null : json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( is_wp_error( $response ) ) {
+			throw $this->google_pay_config_error( 'Request failed: ' . $response->get_error_code() );
+		}
+		if ( ! is_array( $data ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			throw $this->google_pay_config_error( 'Invalid API response (HTTP ' . wp_remote_retrieve_response_code( $response ) . ').' );
+		}
+		// An independently registered Google merchant uses its own ID/domain and no Autopay authJwt.
+		$required = $this->sandbox || '' !== $merchant_id ? [ 'acceptorId' ] : [ 'acceptorId', 'merchantId', 'merchantOrigin', 'merchantName', 'authJwt' ];
+		foreach ( $required as $key ) {
+			if ( empty( $data[ $key ] ) || ! is_scalar( $data[ $key ] ) ) {
+				throw $this->google_pay_config_error( 'Missing or invalid field: ' . $key . '.' );
+			}
+			$data[ $key ] = (string) $data[ $key ];
+		}
+		if ( $this->sandbox ) {
+			return [ 'acceptorId' => $data['acceptorId'], 'merchantInfo' => [ 'merchantName' => $merchant_name ?: $domain ] ];
+		}
+		if ( '' !== $merchant_id ) {
+			return [
+				'acceptorId' => $data['acceptorId'],
+				'merchantInfo' => [ 'merchantId' => $merchant_id, 'merchantOrigin' => $domain, 'merchantName' => $merchant_name ?: $domain ],
+			];
+		}
+		if ( $data['merchantOrigin'] !== $domain ) {
+			throw $this->google_pay_config_error( 'Merchant domain mismatch: expected ' . $domain . ', received ' . $data['merchantOrigin'] . '.' );
+		}
+		return [
+			'acceptorId' => $data['acceptorId'],
+			'merchantInfo' => array_intersect_key( $data, array_flip( [ 'merchantId', 'merchantOrigin', 'merchantName', 'authJwt' ] ) ),
+		];
+	}
+
+	private function google_pay_config_error( string $reason ): \RuntimeException {
+		if ( function_exists( 'wc_get_logger' ) ) {
+			// Log configuration diagnostics only; never API bodies, authJwt, hashes or payment tokens.
+			wc_get_logger()->error( 'Google Pay configuration for ServiceID ' . $this->serviceId . ': ' . $reason, [ 'source' => 'pay-wp' ] );
+		}
+		return new \RuntimeException( __( 'Google Pay is unavailable. Please choose another payment method.', 'pay-wp' ) );
+	}
+
+	public function init_wallet_transaction( array $params ): array {
+		// The installed SDK's transaction DTO drops PaymentToken; sign and send the documented fields directly.
+		$params['Hash'] = $this->hashTransactionParameters( $params );
+		$response = wp_remote_post( $this->get_wallet_api_address() . '/payment', [
+			'timeout' => 25, 'redirection' => 0,
+			'headers' => [ 'BmHeader' => 'pay-bm-continue-transaction-url' ], 'body' => $params,
+		] );
+		$message = __( 'The payment status is unknown. Please contact the shop before trying again.', 'pay-wp' );
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			throw new \RuntimeException( $message );
+		}
+		$body = wp_remote_retrieve_body( $response );
+		if ( strlen( $body ) > 100000 || stripos( $body, '<!DOCTYPE' ) !== false || stripos( $body, '<!ENTITY' ) !== false ) {
+			throw new \RuntimeException( $message );
+		}
+		$previous = libxml_use_internal_errors( true );
+		$xml = simplexml_load_string( $body, 'SimpleXMLElement', LIBXML_NONET );
+		libxml_clear_errors();
+		libxml_use_internal_errors( $previous );
+		if ( false === $xml || $xml->getName() !== 'transaction' ) {
+			throw new \RuntimeException( $message );
+		}
+		$fields = isset( $xml->redirecturl )
+			? [ 'status', 'redirecturl', 'orderID', 'remoteID' ]
+			: [ 'orderID', 'remoteID', 'confirmation', 'reason', 'paymentStatus' ];
+		$data = [];
+		foreach ( $fields as $field ) {
+			if ( isset( $xml->$field ) ) {
+				$data[ $field ] = (string) $xml->$field;
+			}
+		}
+		// Autopay may omit orderID and Hash for NOTCONFIRMED: no charge was submitted.
+		$rejected = 'NOTCONFIRMED' === ( $data['confirmation'] ?? '' ) && empty( $data['remoteID'] );
+		if ( ( ! isset( $xml->hash ) && ! $rejected )
+			|| ( isset( $xml->hash ) && ! hash_equals( $this->hashTransactionParameters( $data ), trim( (string) $xml->hash ) ) ) ) {
+			throw new \RuntimeException( $message );
+		}
+		if ( isset( $data['redirecturl'] ) ) {
+			$url = wp_parse_url( $data['redirecturl'] );
+			if ( ( $data['status'] ?? '' ) !== 'PENDING' || empty( $data['remoteID'] )
+				|| ( $url['scheme'] ?? '' ) !== 'https' || isset( $url['user'] ) || isset( $url['pass'] )
+				|| ( $url['host'] ?? '' ) !== wp_parse_url( $this->get_wallet_api_address(), PHP_URL_HOST )
+				|| ( isset( $url['port'] ) && 443 !== $url['port'] ) ) {
+				throw new \RuntimeException( $message );
+			}
+		} elseif ( ! in_array( $data['confirmation'] ?? '', [ 'CONFIRMED', 'NOTCONFIRMED' ], true )
+			|| ( 'CONFIRMED' === $data['confirmation'] && ( empty( $data['remoteID'] ) || ! in_array( $data['paymentStatus'] ?? '', [ 'PENDING', 'SUCCESS', 'FAILURE' ], true ) ) ) ) {
+			throw new \RuntimeException( $message );
+		}
+		if ( $rejected && ! isset( $data['orderID'] ) ) {
+			$data['orderID'] = (string) $params['OrderID'];
+		}
+		return $data;
 	}
 
 	public function get_shared_key(): string {

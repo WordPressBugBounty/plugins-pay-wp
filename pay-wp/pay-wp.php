@@ -3,7 +3,7 @@
 	Plugin Name: Autopay for WooCommerce
 	Plugin URI: https://www.wpdesk.pl/sk/pay-wp-plugin
 	Description: Autopay online payments for WooCommerce. Pay quickly and securely with electronic transfer, BLIK, G-Pay, Apple Pay or credit card.
-	Version: 2.2.31
+	Version: 2.3.0
 	Author: WP Desk
 	Text Domain: pay-wp
 	Domain Path: /lang/
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /* THESE TWO VARIABLES CAN BE CHANGED AUTOMATICALLY */
-$plugin_version = '2.2.31';
+$plugin_version = '2.3.0';
 $plugin_release_timestamp = '2023-06-05 08:23';
 
 $plugin_name        = 'Autopay dla WooCommerce';

@@ -11,6 +11,7 @@ final class GatewaysProxy {
 	private StandardPaymentGateway $autopay_gateway;
 	private BlikZeroEmbedGateway $blik_gateway;
 	private SubscriptionGateway $subscription_gateway;
+	private array $wallet_gateways = [];
 	private BlueMediaClientFactory $client_factory;
 	private string $plugin_url;
 	private LoggerInterface $logger;
@@ -33,5 +34,9 @@ final class GatewaysProxy {
 
 	public function get_subscription_gateway(): SubscriptionGateway {
 		return $this->subscription_gateway ??= new SubscriptionGateway( $this->client_factory, $this->plugin_url, $this->logger );
+	}
+
+	public function get_wallet_gateway( string $wallet ): WalletGateway {
+		return $this->wallet_gateways[ $wallet ] ??= new WalletGateway( $this->client_factory, $this->plugin_url, $wallet );
 	}
 }

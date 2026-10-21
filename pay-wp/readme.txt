@@ -3,7 +3,7 @@ Contributors: wpdesk, dyszczo
 Tags: autopay, blue media, wp pay, płatności, blik
 Requires at least: 6.1
 Tested up to: 7.1
-Stable tag: 2.2.31
+Stable tag: 2.3.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -210,6 +210,10 @@ Zaktualizuj wtyczkę do najnowszej wersji w menu Wtyczki w WordPress lub w Kokpi
 Możesz też pobrać wtyczkę Autopay dla WooCommerce i wykonać aktualizację samodzielnie, np. przez FTP.
 
 == Changelog ==
+
+= 2.3.0 - 2026-10-21 =
+* Added dedicated Google Pay and Apple Pay payment methods with payments directly in the store.
+* Added wallet support for classic checkout, WooCommerce Checkout blocks, and order payment pages.
 
 = 2.2.31 - 2026-10-07 =
 * Added support for WooCommerce 11.2
