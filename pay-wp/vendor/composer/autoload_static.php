@@ -132,7 +132,7 @@ class ComposerStaticInit5c4f164fd8d37c01e38f9e06c6d6db9c
         'WPDesk\\GatewayWPPay\\BlueMediaApi\\Responses\\RPANResponse' => __DIR__ . '/../..' . '/src/BlueMediaApi/Responses/RPANResponse.php',
         'WPDesk\\GatewayWPPay\\Helpers\\ArrayFlattener' => __DIR__ . '/../..' . '/src/Helpers/ArrayFlattener.php',
         'WPDesk\\GatewayWPPay\\Helpers\\DataConverter' => __DIR__ . '/../..' . '/src/Helpers/DataConverter.php',
-        'WPDesk\\GatewayWPPay\\Helpers\\ItnHashValidator' => __DIR__ . '/../..' . '/src/Helpers/ItnHashValidator.php',
+        'WPDesk\\GatewayWPPay\\Helpers\\ItnMessage' => __DIR__ . '/../..' . '/src/Helpers/ItnMessage.php',
         'WPDesk\\GatewayWPPay\\Helpers\\RPANDecoder' => __DIR__ . '/../..' . '/src/Helpers/RPANDecoder.php',
         'WPDesk\\GatewayWPPay\\Helpers\\WalletPayment' => __DIR__ . '/../..' . '/src/Helpers/WalletPayment.php',
         'WPDesk\\GatewayWPPay\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',

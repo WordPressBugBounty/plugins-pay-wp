@@ -82,9 +82,18 @@ final class WalletPayment {
 	}
 
 	public static function confirm_itn( $order, $itn, string $service_id ): bool {
+		if ( ! $order || ! in_array( $order->get_payment_method(), [
+			'wppay', 'wppay-blik-zero', 'wppay-card', 'wppay_recurring', 'wppay_apple_pay', 'wppay_google_pay'
+		], true ) || ( $itn->toArray()['serviceID'] ?? '' ) !== $service_id
+			|| $order->get_currency() !== $itn->getCurrency()
+			|| ! preg_match( '/^[0-9]+\.[0-9]{2}$/D', $itn->getAmount() )
+			|| number_format( (float) $order->get_total(), 2, '.', '' ) !== $itn->getAmount() ) {
+			return false;
+		}
+
 		$reference = $itn->getOrderID();
 		if ( ! preg_match( '/^wpw[a-f0-9]{29}$/D', $reference ) ) {
-			return true;
+			return ctype_digit( $reference ) && (string) $order->get_id() === $reference;
 		}
 		$attempt = get_option( 'wppay_wallet_reference_' . $reference, [] );
 		return $order && ( $attempt['order'] ?? 0 ) === $order->get_id()

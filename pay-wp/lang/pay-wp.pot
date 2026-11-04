@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Autopay for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Autopay for WooCommerce 2.3.0\n"
+"Project-Id-Version: Autopay for WooCommerce 2.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pay-wp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-21T11:57:33+00:00\n"
+"POT-Creation-Date: 2026-11-04T10:57:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: pay-wp\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: pay-wp.php:5
-#: src/WooCommerceGateway/StandardPaymentGateway.php:51
+#: src/WooCommerceGateway/StandardPaymentGateway.php:48
 msgid "Autopay online payments for WooCommerce. Pay quickly and securely with electronic transfer, BLIK, G-Pay, Apple Pay or credit card."
 msgstr ""
 
@@ -134,7 +134,7 @@ msgid "Default currency"
 msgstr ""
 
 #: src/views/wppay-settings-pos-item.php:4
-#: src/WooCommerceGateway/StandardPaymentGateway.php:85
+#: src/WooCommerceGateway/StandardPaymentGateway.php:82
 msgid "Test mode"
 msgstr ""
 
@@ -160,12 +160,12 @@ msgid "You will receive your credentials by email after registration or you will
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:30
-#: src/WooCommerceGateway/StandardPaymentGateway.php:72
+#: src/WooCommerceGateway/StandardPaymentGateway.php:69
 msgid "Main settings"
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:34
-#: src/WooCommerceGateway/StandardPaymentGateway.php:79
+#: src/WooCommerceGateway/StandardPaymentGateway.php:76
 msgid "Enable/Disable"
 msgstr ""
 
@@ -174,22 +174,22 @@ msgid "Enable payments"
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:40
-#: src/WooCommerceGateway/StandardPaymentGateway.php:93
+#: src/WooCommerceGateway/StandardPaymentGateway.php:90
 msgid "Title"
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:42
-#: src/WooCommerceGateway/StandardPaymentGateway.php:95
+#: src/WooCommerceGateway/StandardPaymentGateway.php:92
 msgid "The name of the payment gateway that the customer sees when placing an order."
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:47
-#: src/WooCommerceGateway/StandardPaymentGateway.php:100
+#: src/WooCommerceGateway/StandardPaymentGateway.php:97
 msgid "Description of the payment gateway that the customer sees when placing an order."
 msgstr ""
 
 #: src/WooCommerceGateway/AbstractEmbedGateway.php:49
-#: src/WooCommerceGateway/StandardPaymentGateway.php:102
+#: src/WooCommerceGateway/StandardPaymentGateway.php:99
 msgid "Autopay online payments. Pay by electronic transfer, traditional bank transfer or credit card."
 msgstr ""
 
@@ -223,7 +223,7 @@ msgstr ""
 
 #: src/WooCommerceGateway/BlikZeroEmbedGateway.php:148
 #: src/WooCommerceGateway/CardEmbedGateway.php:81
-#: src/WooCommerceGateway/StandardPaymentGateway.php:276
+#: src/WooCommerceGateway/StandardPaymentGateway.php:265
 #: src/WooCommerceGateway/SubscriptionGateway.php:208
 #: src/WooCommerceGateway/WalletGateway.php:347
 msgid "Autopay transaction"
@@ -272,52 +272,48 @@ msgstr ""
 msgid "Card was not authorized correctly."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:50
-#: src/WooCommerceGateway/StandardPaymentGateway.php:59
+#: src/WooCommerceGateway/StandardPaymentGateway.php:47
+#: src/WooCommerceGateway/StandardPaymentGateway.php:56
 msgid "Autopay Quick Payments"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:81
+#: src/WooCommerceGateway/StandardPaymentGateway.php:78
 msgid "Enable Autopay"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:87
+#: src/WooCommerceGateway/StandardPaymentGateway.php:84
 msgid "Make test payments only"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:88
+#: src/WooCommerceGateway/StandardPaymentGateway.php:85
 msgid "The ID and Hash Key for the test environment are different from the production data. To get the data for the test environment, please contact - dws@autopay.pl."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:107
+#: src/WooCommerceGateway/StandardPaymentGateway.php:104
 msgid "Currency management"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:142
-msgid "Incorrect ITN message"
-msgstr ""
-
-#: src/WooCommerceGateway/StandardPaymentGateway.php:173
+#: src/WooCommerceGateway/StandardPaymentGateway.php:175
 msgid "Override FAILURE status due to ITN message"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:216
+#: src/WooCommerceGateway/StandardPaymentGateway.php:205
 msgid "Incorrect payment reference."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:234
+#: src/WooCommerceGateway/StandardPaymentGateway.php:223
 msgid "Incorrect hash sent from BM"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:242
+#: src/WooCommerceGateway/StandardPaymentGateway.php:231
 msgid "Redirected to payment"
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:261
+#: src/WooCommerceGateway/StandardPaymentGateway.php:250
 msgid "Thank you for placing your order. Click to make payment by using Autopay."
 msgstr ""
 
-#: src/WooCommerceGateway/StandardPaymentGateway.php:265
+#: src/WooCommerceGateway/StandardPaymentGateway.php:254
 msgid "The payment method was not configured correctly and is not available."
 msgstr ""
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="digits">
+    <xs:restriction base="xs:string"><xs:pattern value="[0-9]+"/></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="reference">
+    <xs:restriction base="xs:string"><xs:pattern value="[0-9]+|wpw[a-f0-9]{29}"/></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="nonEmpty">
+    <xs:restriction base="xs:string"><xs:minLength value="1"/></xs:restriction>
+  </xs:simpleType>
+  <xs:element name="transactionList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="serviceID" type="digits"/>
+        <xs:element name="transactions">
+          <xs:complexType><xs:sequence>
+            <xs:element name="transaction">
+              <xs:complexType><xs:sequence>
+                <xs:element name="orderID" type="reference"/>
+                <xs:element name="remoteID" type="nonEmpty"/>
+                <xs:element name="amount">
+                  <xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="[0-9]+\.[0-9]{2}"/></xs:restriction></xs:simpleType>
+                </xs:element>
+                <xs:element name="currency">
+                  <xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="[A-Z]{3}"/></xs:restriction></xs:simpleType>
+                </xs:element>
+                <xs:element name="gatewayID" type="digits"/>
+                <xs:element name="paymentDate">
+                  <xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="[0-9]{14,17}"/></xs:restriction></xs:simpleType>
+                </xs:element>
+                <xs:element name="paymentStatus">
+                  <xs:simpleType><xs:restriction base="xs:string">
+                    <xs:enumeration value="SUCCESS"/><xs:enumeration value="FAILURE"/><xs:enumeration value="PENDING"/>
+                  </xs:restriction></xs:simpleType>
+                </xs:element>
+                <xs:element name="paymentStatusDetails" type="xs:string"/>
+                <xs:element name="addressIP" type="xs:string" minOccurs="0"/>
+                <xs:element name="customerNumber" type="xs:string" minOccurs="0"/>
+                <xs:element name="title" type="xs:string" minOccurs="0"/>
+                <xs:element name="customerData" minOccurs="0">
+                  <xs:complexType><xs:sequence>
+                    <xs:element name="fName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="lName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="streetName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="streetHouseNo" type="xs:string" minOccurs="0"/>
+                    <xs:element name="streetStaircaseNo" type="xs:string" minOccurs="0"/>
+                    <xs:element name="streetPremiseNo" type="xs:string" minOccurs="0"/>
+                    <xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+                    <xs:element name="city" type="xs:string" minOccurs="0"/>
+                    <xs:element name="nrb" type="xs:string" minOccurs="0"/>
+                    <xs:element name="senderData" type="xs:string" minOccurs="0"/>
+                  </xs:sequence></xs:complexType>
+                </xs:element>
+              </xs:sequence></xs:complexType>
+            </xs:element>
+          </xs:sequence></xs:complexType>
+        </xs:element>
+        <xs:element name="hash">
+          <xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="[a-fA-F0-9]{64}|[a-fA-F0-9]{128}"/></xs:restriction></xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

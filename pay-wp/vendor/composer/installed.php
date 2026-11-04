@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpdesk/gateway-wp-pay',
-        'pretty_version' => '2.3.0',
-        'version' => '2.3.0.0',
-        'reference' => '8f3cbb8ef4470d36ddea22fa68309045bffd672d',
+        'pretty_version' => '2.3.1',
+        'version' => '2.3.1.0',
+        'reference' => '2a3f368a5fbab23c1d9df87dcf6ec058b793a1af',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -74,9 +74,9 @@
             'dev_requirement' => false,
         ),
         'wpdesk/gateway-wp-pay' => array(
-            'pretty_version' => '2.3.0',
-            'version' => '2.3.0.0',
-            'reference' => '8f3cbb8ef4470d36ddea22fa68309045bffd672d',
+            'pretty_version' => '2.3.1',
+            'version' => '2.3.1.0',
+            'reference' => '2a3f368a5fbab23c1d9df87dcf6ec058b793a1af',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -4,12 +4,9 @@ namespace WPDesk\GatewayWPPay\WooCommerceGateway;
 
 use WPDesk\GatewayWPPay\Helpers\WalletPayment;
 
-use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaClient;
 use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaClientFactory;
 use WPDesk\GatewayWPPay\BlueMediaApi\BlueMediaNoCredentilalsException;
-use WPDesk\GatewayWPPay\Helpers\ItnHashValidator;
-use WPPayVendor\BlueMedia\Client;
-use WPPayVendor\BlueMedia\Itn\ValueObject\Itn;
+use WPDesk\GatewayWPPay\Helpers\ItnMessage;
 use WPPayVendor\BlueMedia\Itn\ValueObject\ItnResponse\ItnResponse;
 use WPPayVendor\Psr\Log\LoggerInterface;
 
@@ -136,73 +133,65 @@ final class StandardPaymentGateway extends \WC_Payment_Gateway {
 	}
 
 	public function itn_response(): void {
-//		file_put_contents( __DIR__ . '/itn_response.txt', 'test', FILE_APPEND );
-		$transactions = sanitize_text_field( $_REQUEST['transactions'] ?? '' );
-		if ( empty( $transactions ) ) {
-			wp_die( __( 'Incorrect ITN message', 'pay-wp' ) );
+		$stage = 'payload';
+		try {
+			$transactions = $_REQUEST['transactions'] ?? '';
+			$message = ItnMessage::parse( $transactions );
+			$itn = $message->get_itn();
+			$stage = 'credentials';
+			$bm_client = $this->client_factory->get_client( $itn->getCurrency() );
+			$stage = 'hash';
+			if ( ! $bm_client->checkHash( $message ) ) {
+				throw new \RuntimeException( 'Invalid ITN hash.' );
+			}
+			$stage = 'order matching';
+			$order = WalletPayment::resolve_order( $itn->getOrderID() );
+			if ( ! WalletPayment::confirm_itn( $order, $itn, $bm_client->get_service_id() ) ) {
+				throw new \RuntimeException( 'ITN does not match the order.' );
+			}
+		} catch ( \Throwable $exception ) {
+			$context = [ 'stage' => $stage, 'exception' => get_class( $exception ) ];
+			if ( $exception instanceof \InvalidArgumentException && 0 === strpos( $exception->getMessage(), 'Invalid ITN ' ) ) {
+				$context['reason'] = $exception->getMessage();
+			}
+			$this->logger->warning( 'ITN rejected.', $context );
+			wp_die( 'NOTCONFIRMED', '', [ 'response' => 400 ] );
+			return;
 		}
-		$itn = Client::getItnObject( $transactions );
+		$status = $itn->getPaymentStatus();
 
-		$bm_client = $this->client_factory->get_client( $itn->getCurrency() );
-		$result    = $bm_client->doItnIn( $transactions );
+		BlikZeroEmbedGateway::update_blik_status( $order->get_id(), $status );
 
-		/** @var \WPPayVendor\BlueMedia\Itn\ValueObject\Itn $itnIn */
-		$itnIn                = $result->getData();
-		$transactionConfirmed = $this->validate_itn_hash( $transactions, $bm_client, $itnIn );
-		$order = WalletPayment::resolve_order( $itnIn->getOrderID() );
-		$transactionConfirmed = $transactionConfirmed && $order
-			&& WalletPayment::confirm_itn( $order, $itnIn, $bm_client->get_service_id() );
-//		file_put_contents( __DIR__ . '/itn_response.txt', print_r( $itnIn, true ), FILE_APPEND );
-		$this->logger->debug( print_r( $itnIn, true ) );
-
-		if ( $transactionConfirmed ) {
-			$status = $itnIn->getPaymentStatus();
-
-			BlikZeroEmbedGateway::update_blik_status( $order->get_id(), $status );
-
-			if ( $status === 'SUCCESS' ) {
-				if ( $order->has_status( [
-					'wc-pending',
-					'pending',
-					'wc-failed',
-					'failed',
-					'wc-on-hold',
-					'on-hold'
-				] ) ) {
-					if ( $order->has_status( [ 'wc-failed', 'failed' ] ) ) {
-						$order->add_order_note( __( 'Override FAILURE status due to ITN message',
-							'pay-wp' ) );
-					}
-				}
-				$order->payment_complete( $itn->getRemoteID() );
-
-			} elseif ( $status === 'FAILURE' && ( strpos( $itnIn->getOrderID(), 'wpw' ) !== 0
-				|| get_option( 'wppay_wallet_pending_' . $order->get_id() ) === $itnIn->getOrderID() ) ) {
-				if ( $order->has_status( [ 'wc-pending', 'pending', 'wc-on-hold', 'on-hold' ] ) ) {
-					$order->update_status( 'failed' );
+		if ( $status === 'SUCCESS' ) {
+			if ( $order->has_status( [
+				'wc-pending',
+				'pending',
+				'wc-failed',
+				'failed',
+				'wc-on-hold',
+				'on-hold'
+			] ) ) {
+				if ( $order->has_status( [ 'wc-failed', 'failed' ] ) ) {
+					$order->add_order_note( __( 'Override FAILURE status due to ITN message',
+						'pay-wp' ) );
 				}
 			}
-			if ( in_array( $status, [ 'SUCCESS', 'FAILURE' ], true ) ) {
-				WalletPayment::finish_attempt( $order->get_id(), $itnIn->getOrderID() );
+			$order->payment_complete( $itn->getRemoteID() );
+
+		} elseif ( $status === 'FAILURE' && ( strpos( $itn->getOrderID(), 'wpw' ) !== 0
+			|| get_option( 'wppay_wallet_pending_' . $order->get_id() ) === $itn->getOrderID() ) ) {
+			if ( $order->has_status( [ 'wc-pending', 'pending', 'wc-on-hold', 'on-hold' ] ) ) {
+				$order->update_status( 'failed' );
 			}
 		}
+		if ( in_array( $status, [ 'SUCCESS', 'FAILURE' ], true ) ) {
+			WalletPayment::finish_attempt( $order->get_id(), $itn->getOrderID() );
+		}
 
-		$itnResponse = $bm_client->doItnInResponse( $itnIn, $transactionConfirmed );
+		$itnResponse = $bm_client->doItnInResponse( $itn, true );
 		/** @var ItnResponse $responseData */
 		$responseData = $itnResponse->getData();
 		die( $responseData->toXml() );
-	}
-
-	private function validate_itn_hash( string $transactions, BlueMediaClient $bm_client, Itn $itn ): bool {
-		try {
-			if ( $bm_client->checkHash( $itn ) ) {
-				return true;
-			}
-		} catch ( \Throwable $exception ) {
-			$this->logger->debug( sprintf( 'ITN hash validation fallback triggered: %s', $exception->getMessage() ) );
-		}
-
-		return ItnHashValidator::is_valid( $transactions, [ $bm_client, 'hashTransactionParameters' ] );
 	}
 
 	public function return_after_transaction(): void {

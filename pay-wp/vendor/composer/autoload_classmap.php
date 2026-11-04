@@ -76,7 +76,7 @@ return array(
     'WPDesk\\GatewayWPPay\\BlueMediaApi\\Responses\\RPANResponse' => $baseDir . '/src/BlueMediaApi/Responses/RPANResponse.php',
     'WPDesk\\GatewayWPPay\\Helpers\\ArrayFlattener' => $baseDir . '/src/Helpers/ArrayFlattener.php',
     'WPDesk\\GatewayWPPay\\Helpers\\DataConverter' => $baseDir . '/src/Helpers/DataConverter.php',
-    'WPDesk\\GatewayWPPay\\Helpers\\ItnHashValidator' => $baseDir . '/src/Helpers/ItnHashValidator.php',
+    'WPDesk\\GatewayWPPay\\Helpers\\ItnMessage' => $baseDir . '/src/Helpers/ItnMessage.php',
     'WPDesk\\GatewayWPPay\\Helpers\\RPANDecoder' => $baseDir . '/src/Helpers/RPANDecoder.php',
     'WPDesk\\GatewayWPPay\\Helpers\\WalletPayment' => $baseDir . '/src/Helpers/WalletPayment.php',
     'WPDesk\\GatewayWPPay\\Plugin' => $baseDir . '/src/Plugin.php',
